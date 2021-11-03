@@ -4,7 +4,9 @@
 
 body {
     margin: 0;
-    background-color: whitesmoke;
+    /* background-color: whitesmoke; */
+    /* background-image: radial-gradient(circle,#25274d, #1e3b70  ); */
+    
 }
 
 *{
