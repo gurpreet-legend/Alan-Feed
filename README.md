@@ -29,7 +29,7 @@ A Voice-Assisstant News Application
 
 :white_check_mark: &nbsp;User can have a casual conversation with the AI.
 
-**Try the asking Alan following things from Alan :**
+**Try the asking Alan :**
 
 * How are you ?
 * Are you good or evil
