@@ -1,0 +1,220 @@
+intent('What does this app do?', 'What can I do here ?',
+       reply('This is a news project'));
+
+
+
+const API_KEY = 'e50c4c0d1c3545f086047d1b8437cbc6';
+let savedArticles = [];
+
+//News by Source
+intent(`Give me the news from $(SOURCE* (.*))`, (p) => {
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}` ;
+
+    if(p.SOURCE.value) {
+        NEWS_API_URL = `${NEWS_API_URL}&sources=${p.SOURCE.value.toLowerCase().split(" ").join('-')}`;
+    }
+
+    api.request(NEWS_API_URL, (error, response, body) => {
+        const { articles } = JSON.parse(body);
+        if(!articles) {
+            p.play('Sorry, please try searching news from a different source');
+            return;
+        }
+
+        savedArticles = articles;
+
+        p.play({ command : 'newHeadlines', articles});
+        p.play(`Here are the (latest|recent) news from ${p.SOURCE.value}`);
+
+        p.play('Would you like me to read the headlines ?');
+        p.then(confirmation);
+    });
+})
+
+//News by Term
+intent(`What\'s up with' $(TERM* (.*))`, (p) => {
+    let NEWS_API_URL = `https://newsapi.org/v2/everything?apiKey=${API_KEY}` ;
+
+    if(p.TERM.value) {
+        NEWS_API_URL = `${NEWS_API_URL}&q=${p.TERM.value}`;
+    }
+
+    api.request(NEWS_API_URL, (error, response, body) => {
+        const { articles } = JSON.parse(body);
+        if(!articles) {
+            p.play('Sorry, please try searching for something else');
+            return;
+        }
+
+        savedArticles = articles;
+
+        p.play({ command : 'newHeadlines', articles});
+        p.play(`Here are the (latest|recent) articles on ${p.TERM.value}`);
+
+        p.play('Would you like me to read the headlines ?');
+        p.then(confirmation);
+    });
+})
+
+const CATEGORIES = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
+const CATEGORIES_INTENT = `${CATEGORIES.map((category) => `${category}~${category}`).join('|')}` + '|';
+
+//News by Category
+intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|latest|) (news|headlines) (in|about|on|) $(C~ ${CATEGORIES_INTENT})`,
+       `(read|show|get|bring me|give me) (the|) (recent|latest) $(C~ ${CATEGORIES_INTENT}) (news|headlines)`, (p) => {
+
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}` ;
+
+    if(p.C.value) {
+        NEWS_API_URL = `${NEWS_API_URL}&category=${p.C.value}`;
+    }
+    else{
+        NEWS_API_URL = `${NEWS_API_URL}&country=in`;
+    }
+
+    api.request(NEWS_API_URL, (error, response, body) => {
+        const { articles } = JSON.parse(body);
+        if(!articles) {
+            p.play('Sorry, please try searching for a different category');
+            return;
+        }
+
+        savedArticles = articles;
+
+        p.play({ command : 'newHeadlines', articles});
+        if(p.C.value) {
+            p.play(`Here are the (latest|recent) articles on ${p.C.value}`);
+        }
+        else if(p.C.value == ''){
+            p.play(`Here are the (latest|recent) news`);
+        }
+
+        p.play('Would you like me to read the headlines ?');
+        p.then(confirmation);
+    });
+})
+
+//News by Country 
+const COUNTRIES = {
+    'ar':'Argentina',
+    'au':'Australia',
+    'at':'Austria',
+    'be':'Belgium',
+    'br':'Brazil',
+    'bg':'Bulgaria',
+    'ca':'Canada',
+    'cn':'China',
+    'co':'Colombia',
+    'cu':'Cuba',
+    'cz':'Czech Republic',
+    'eg':'Egypt',
+    'fr':'France',
+    'de':'Germany',
+    'gr':'Greece',
+    'hk':'Hong Kong',
+    'hu':'Hungary',
+    'in':'India',
+    'id':'Indonesia',
+    'ie':'Ireland',
+    'il':'Israel',
+    'it':'Italy',
+    'jp':'Japan',
+    'lv':'Latvia',
+    'lt':'Lithuania',
+    'my':'Malaysia',
+    'mx':'Mexico',
+    'ma':'Morocco',
+    'nl':'Netherlands',
+    'nz':'New Zealand',
+    'ng':'Nigeria',
+    'no':'Norway',
+    'ph':'Philippines',
+    'pl':'Poland',
+    'pt':'Portugal',
+    'ro':'Romania',
+    'ru':'Russia',
+    'sa':'Saudi Arabia',
+    'rs':'Serbia',
+    'sg':'Singapore',
+    'sk':'Slovakia',
+    'si':'Slovenia',
+    'za':'South Africa',
+    'kr':'South Korea',
+    'se':'Sweden',
+    'ch':'Switzerland',
+    'tw':'Taiwan',
+    'th':'Thailand',
+    'tr':'Turkey',
+    'ae':'UAE',
+    'ua':'Ukraine',
+    'gb':'United Kingdom',
+    'us':'United States',
+    've':'Venuzuela',
+}
+
+intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|latest|) (news|headlines) (in|about|on|) $(C~ ${CATEGORIES_INTENT}) from $(COUNTRY* (.*))`,
+       `(read|show|get|bring me|give me) (the|) (recent|latest) $(C~ ${CATEGORIES_INTENT}) (news|headlines) from $(COUNTRY* (.*))`, (p) => {
+
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}` ;
+
+
+    const keys = Object.keys(COUNTRIES);
+
+    keys.forEach((key, index) => {
+        if(COUNTRIES[key] === p.COUNTRY.value){
+            NEWS_API_URL = `${NEWS_API_URL}&country=${key}` ;
+        }  
+    });
+
+
+    if(p.C.value) {
+        NEWS_API_URL = `${NEWS_API_URL}&category=${p.C.value}`;
+    }
+
+    api.request(NEWS_API_URL, (error, response, body) => {
+        const { articles } = JSON.parse(body);
+        if(!articles) {
+            p.play('Sorry, please try searching for a different country');
+            return;
+        }
+
+        savedArticles = articles;
+
+        p.play({ command : 'newHeadlines', articles});
+        p.play(`Here are the (latest|recent) articles on ${p.C.value} from ${p.COUNTRY.value}`);
+
+        p.play('Would you like me to read the headlines ?');
+        p.then(confirmation);
+    });
+
+})
+
+const confirmation = context(() => {
+    intent('yes', async (p) => {
+        for(let i=0; i<savedArticles.length; i++){
+            p.play({ command: 'highlight', article: savedArticles[i]});
+            p.play(`${savedArticles[i].title}`)
+        }
+    });
+
+    intent('no', async (p) => {
+        p.play('Sure, sounds good to me');
+    });
+});
+
+//Opening the called article
+intent(`Open (the|) (article|) (number|) $(NUM* (.*))`, (p) => {
+    if(p.NUM.value) {
+        p.play({command : 'open', number: p.NUM.value, articles: savedArticles})
+    }
+})
+
+//Going back
+intent('(go|) back', (p)=> {
+    p.play('Sure, going back');
+    p.play({command: 'newHeadlines', articles: []});
+})
+
+intent('Thanks (Alan|)','Thank you (Alan|)', (p)=> {
+    p.play('You should thank my creator, Gurpreet Singh');
+});
