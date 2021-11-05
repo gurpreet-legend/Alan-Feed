@@ -6,8 +6,8 @@ A Voice-Assisstant News Application
 ![GitHub issues](https://img.shields.io/github/issues/gurpreet-legend/Alan-Feed?style=for-the-badge)&nbsp;
 ![GitHub repo size](https://img.shields.io/github/repo-size/gurpreet-legend/Alan-Feed?style=for-the-badge)
 
-<a href="https://ibb.co/NCYZV1g"><img src="https://ibb.co/NCYZV1g" alt="Webpage image" target="_black"></a>
-<a href="https://ibb.co/PthzZvy"><img src="https://ibb.co/PthzZvy" alt="Webpage image" target="_black"></a><br />
+<a href="https://ibb.co/NCYZV1g"><img src="https://i.ibb.co/MSNM28y/2021-11-06-9.png" alt="2021-11-06-9" border="0" target="_black"></a>
+<a href="https://ibb.co/PthzZvy"><img src="https://i.ibb.co/zNRHhTg/2021-11-06-8.png" alt="2021-11-06-8" border="0" target="_black"></a><br />
 
 ## Hostlink
 <a href="https://alan-feed.netlify.app/">alan-feed.netlify.app</a>
