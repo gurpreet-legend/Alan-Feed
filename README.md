@@ -70,5 +70,5 @@ the same commands which has been coded in the system>
 
 ## License & copyright
 
-Copyright (c) [2021] [Gurpreet Singh]
+Copyright (c) 2021 Gurpreet Singh\
 Licensed under the [MIT License](LICENSE)
