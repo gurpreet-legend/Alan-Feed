@@ -21,15 +21,36 @@ A Voice-Assisstant News Application
 
 ## Features 
 
-:white_check_mark: &nbsp;User-friendly AI named `Alan`.
+:white_check_mark: &nbsp;User-friendly AI named **Alan**.
 
 :white_check_mark: &nbsp;Voice search for news articles.
 
-:white_check_mark: &nbsp;User can search news based on `Categories/Countries`, `Terms` & `Sources`.
+:white_check_mark: &nbsp;User can search news based on **Categories/Countries**, **Terms** & **Sources**.
 
 :white_check_mark: &nbsp;User can have a casual conversation with the AI.
 
-**Try the asking Alan :**
+## Command Instructions 
+
+**Try the recommended commands on the screen**
+
+* `Give me the latest news` : To get the latest news in your country
+* `Give me the latest <Category> news from <country>` : To get the desired category news from your desired country
+* `What's up with <Term>` : To get the news about that particular term
+* `Give me the news from <Source>` : To get the news from a particular source
+
+>Note : 
+You can tweek the commands to some extent like :
+* Instead of asking `Give me the latest business news`, 
+try asking `What is the recent news on business`
+* Similarly, examples are: 
+  * `Give me the latest Technology news from United States` -> `Bring me the recent Technology headlines from United States`
+  * `Give me the latest sports news` -> `Read the latest headlines about sports`
+  * so on ...
+
+<Thus, Alan behaves as a eal human and can understand multiple meanings behind 
+the same commands which has been coded in the system>
+
+**For Casual conversation,Try the asking Alan :**
 
 * How are you ?
 * Are you good or evil
