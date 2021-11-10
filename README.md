@@ -68,3 +68,7 @@ the same commands which has been coded in the system>
 
 `PS:` Be polite, Alan is a bit rude ;) 
 
+## License & copyright
+
+Copyright (c) [2021] [Gurpreet Singh]
+Licensed under the [MIT License](LICENSE)
