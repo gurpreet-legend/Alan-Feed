@@ -9,7 +9,7 @@ A Voice-Assisstant News Application
 <a href="https://ibb.co/NCYZV1g"><img src="https://i.ibb.co/MSNM28y/2021-11-06-9.png" alt="2021-11-06-9" border="0" target="_black"></a>
 <a href="https://ibb.co/PthzZvy"><img src="https://i.ibb.co/zNRHhTg/2021-11-06-8.png" alt="2021-11-06-8" border="0" target="_black"></a><br />
 
-## Hostlink
+## Hostlink [![Netlify Status](https://api.netlify.com/api/v1/badges/4c7aaef9-902e-4e9d-8f11-96d39ca3205e/deploy-status)](https://app.netlify.com/sites/alan-feed/deploys)
 <a href="https://alan-feed.netlify.app/">alan-feed.netlify.app</a>
 
 ## Tech-Stack
