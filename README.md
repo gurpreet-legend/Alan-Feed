@@ -16,6 +16,7 @@ A Voice-Assisstant News Application
 
 <a href="https://reactjs.org/" target="_blank"> <img src="https://img.icons8.com/color/48/000000/react-native.png"/> </a>&nbsp;
 <a href="https://mui.com/" target="_blank"> <img src="https://img.icons8.com/color/48/000000/material-ui.png"/> </a>&nbsp;
+<a href="https://www.netlify.com/" target="_blank"> <img src="https://cdn.freebiesupply.com/logos/large/2x/netlify-logo-png-transparent.png" width="50px" height="50px"/> </a>&nbsp;
 <a href="https://alan.app/platform" target="_blank"> <img src="https://user-images.githubusercontent.com/75157493/140567265-b892f245-abe3-4480-afd5-83c13e3e74b5.png"/> </a>&nbsp;
 
 
