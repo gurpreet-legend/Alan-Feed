@@ -3,8 +3,9 @@ import alanBtn from '@alan-ai/alan-sdk-web';
 import NewsCards from './components/NewsCards/NewsCards'
 import wordsToNumbers from 'words-to-numbers'
 import useStyles from './styles'
+import Config from './config/config'
 
-const alanKey = process.env.REACT_APP_ALAN_KEY;
+const alanKey = Config.alanKey
 
 const App = () => {
 
