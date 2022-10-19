@@ -30,6 +30,10 @@ A Voice-Assisstant News Application
 
 :white_check_mark: &nbsp;User can have a casual conversation with the AI.
 
+## Contribution Guidelines:
+
+Follow the `CONTRIBUTING.md` for contributing in this project.
+
 ## Command Instructions 
 
 **Try the recommended commands on the screen**

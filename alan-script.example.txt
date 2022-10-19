@@ -3,7 +3,7 @@ intent('What does this app do?', 'What can I do here ?',
 
 
 
-const API_KEY = 'e50c4c0d1c3545f086047d1b8437cbc6';
+const API_KEY = {NEWS_API_KEY};
 let savedArticles = [];
 
 //News by Source

@@ -6,15 +6,15 @@ Follow the below instructions for contributing in this project:
 3. Make sure you at the root of the project directory, then in the terminal, 
     * Run command `npm run start` to download respective dependencies and dev-dependencies
 4.Create a Alan ai project from this [link](https://alan.app/) and at the root create a `.env` file and add the environment variables as per the `.env.example` file provided in the `client` directory 
-
+5. After ceating the Alan project, create an Alan script and copy the text written in `alan-script.example.txt` and add the `NEWS_API_KEY` after creating an account on [News API](https://newsapi.org/)
 
 #### The project has been successfully installed in the device.
-5. Start the application by running the following command
-> ``` nodemon index.js ```
-1. Now go to the address below to your default browser
-> ```localhost:5000```
+6. Start the application by running the following command
+> ``` npm run start ```
+7. Now go to the address below to your default browser
+> ```localhost:3000```
 
-*Steps 1-4 are needed for first-time installation only. Only steps 5 and 6 will be needed while devolping the project.*
+*Steps 1-5 are needed for first-time installation only. Only steps 6 and 7 will be needed while devolping the project.*
 
 
 ## Creating an issue
