@@ -10,12 +10,16 @@ module.exports = {
     "overrides": [
     ],
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+        "ecmaVersion": 12,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true
+        }
     },
     "plugins": [
         "react"
     ],
     "rules": {
-    }
+        "react/prop-types": "off"
+      }
 }
