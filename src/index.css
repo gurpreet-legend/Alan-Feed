@@ -1,18 +1,19 @@
-#root, html, body {
-    height: 100vh;
+#root,
+html,
+body {
+  height: 100vh;
 }
 
 body {
-    margin: 0;
-    /* background-color: whitesmoke; */
-    /* background-image: radial-gradient(circle,#25274d, #1e3b70  ); */
-    
+  margin: 0;
+  /* background-color: whitesmoke; */
+  /* background-image: radial-gradient(circle,#25274d, #1e3b70  ); */
 }
 
-*{
-    box-sizing: border-box;
+* {
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
