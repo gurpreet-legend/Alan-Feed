@@ -5,6 +5,7 @@ import wordsToNumbers from 'words-to-numbers'
 import useStyles from './styles'
 import Config from './config/config'
 import './index.css'
+import {BsFillMoonStarsFill, BsFillSunFill} from "react-icons/bs"
 
 const alanKey = Config.alanKey;
 
@@ -13,24 +14,24 @@ const App = () => {
   const [activeArticle, setActiveArticle] = useState(-1);
   const classes = useStyles();
 
-  const [style, setStyle] = useState("cont");
+  const [theme, setTheme] = useState("dark");
 
   const changeMode = () => {
      
-    if(style=="cont")
+    if(theme=="dark")
      {
-      setStyle("cont2");
+      setTheme("light");
      }
-      else setStyle("cont");
+      else setTheme("dark");
      
     };
     
   useEffect(() => {
     alanBtn({
       key: alanKey,
-      onCommand: ({ command, articles, number }) => {
+      onCommand: ({ command, savedArticles, number }) => {
         if (command === "newHeadlines") {
-          setNewsArticles(articles);
+          setNewsArticles(savedArticles);
           setActiveArticle(-1);
         } else if (command === "highlight") {
           setActiveArticle((prevActiveArticle) => prevActiveArticle + 1);
@@ -39,7 +40,7 @@ const App = () => {
             number.length > 2
               ? wordsToNumbers(number, { fuzzy: true })
               : number;
-          const article = articles[parsedNumber - 1];
+          const article = savedArticles[parsedNumber - 1];
 
           if (parsedNumber > 20) {
             alanBtn().playText("Please try that again.");
@@ -56,12 +57,12 @@ const App = () => {
     
 
     return (
-        <div className={style} >
+        <div className={theme} >
             <div className={classes.logoContainer}>
                 <img src="https://miro.medium.com/max/1200/1*CJyCnZVdr-EfgC27MAdFUQ.jpeg" alt="Alan logo" className={classes.alanLogo}/>
             </div>
             <NewsCards articles={newsArticles} activeArticle={activeArticle}/>
-            <button onClick={changeMode} id="btn"> Toggle Mode</button>
+            <button onClick={changeMode} id="btn">{theme=="light"?<BsFillMoonStarsFill/>:<BsFillSunFill/>}</button>
         </div>
     )
 }

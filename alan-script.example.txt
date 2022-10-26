@@ -8,52 +8,49 @@ let savedArticles = [];
 
 //News by Source
 intent(`Give me the news from $(SOURCE* (.*))`, (p) => {
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}` ;
-
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&country=in` ;
     if(p.SOURCE.value) {
-        NEWS_API_URL = `${NEWS_API_URL}&sources=${p.SOURCE.value.toLowerCase().split(" ").join('-')}`;
+        NEWS_API_URL = `${NEWS_API_URL.slice(0, -11)}&sources=${p.SOURCE.value.toLowerCase().split(" ").join('-')}`;
     }
 
-    api.request(NEWS_API_URL, (error, response, body) => {
-        const { articles } = JSON.parse(body);
-        if(!articles) {
-            p.play('Sorry, please try searching news from a different source');
-            return;
-        }
-
-        savedArticles = articles;
-
-        p.play({ command : 'newHeadlines', articles});
-        p.play(`Here are the (latest|recent) news from ${p.SOURCE.value}`);
-
-        p.play('Would you like me to read the headlines ?');
-        p.then(confirmation);
-    });
+    api.axios.get(NEWS_API_URL)
+        .then((response) => {
+            savedArticles = response.data.articles;
+            
+            p.play({ command : 'newHeadlines', savedArticles});
+            if(p.SOURCE.value && p.SOURCE.value != '') {
+                p.play(`Here are the (latest|recent) articles on ${p.SOURCE.value}`);
+            }
+            else if(p.SOURCE.value == ''){
+                p.play(`Here are the (latest|recent) news`);
+            }
+            p.play('Would you like me to read the headlines ?');
+            p.then(confirmation);
+        })
+        .catch((error) => {
+             p.play('Sorry, please try searching for a different category');
+        });
 })
 
 //News by Term
 intent(`What\'s up with' $(TERM* (.*))`, (p) => {
-    let NEWS_API_URL = `https://newsapi.org/v2/everything?apiKey=${API_KEY}` ;
+    let NEWS_API_URL = `https://newsapi.org/v2/everything?apiKey=${API_KEY}&country=in` ;
 
     if(p.TERM.value) {
-        NEWS_API_URL = `${NEWS_API_URL}&q=${p.TERM.value}`;
+        NEWS_API_URL = `${NEWS_API_URL.slice(0, -11)}&q=${p.TERM.value}`;
     }
-
-    api.request(NEWS_API_URL, (error, response, body) => {
-        const { articles } = JSON.parse(body);
-        if(!articles) {
-            p.play('Sorry, please try searching for something else');
-            return;
-        }
-
-        savedArticles = articles;
-
-        p.play({ command : 'newHeadlines', articles});
-        p.play(`Here are the (latest|recent) articles on ${p.TERM.value}`);
-
-        p.play('Would you like me to read the headlines ?');
-        p.then(confirmation);
-    });
+     api.axios.get(NEWS_API_URL)
+        .then((response) => {
+            savedArticles = response.data.articles;
+            p.play({ command : 'newHeadlines', savedArticles});
+            p.play(`Here are the (latest|recent) articles on ${p.TERM.value}`);
+    
+            p.play('Would you like me to read the headlines ?');
+            p.then(confirmation);
+         })
+         .catch((error) => {
+                p.play('Sorry, please try searching for something else');
+         });
 })
 
 const CATEGORIES = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
@@ -63,35 +60,31 @@ const CATEGORIES_INTENT = `${CATEGORIES.map((category) => `${category}~${categor
 intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|latest|) (news|headlines) (in|about|on|) $(C~ ${CATEGORIES_INTENT})`,
        `(read|show|get|bring me|give me) (the|) (recent|latest) $(C~ ${CATEGORIES_INTENT}) (news|headlines)`, (p) => {
 
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}` ;
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&country=in` ;
 
     if(p.C.value) {
-        NEWS_API_URL = `${NEWS_API_URL}&category=${p.C.value}`;
+        NEWS_API_URL = `${NEWS_API_URL.slice(0, -11)}&category=${p.C.value}`;
     }
     else{
-        NEWS_API_URL = `${NEWS_API_URL}&country=in`;
+        NEWS_API_URL = `${NEWS_API_URL.slice(0, -11)}&country=in`;
     }
 
-    api.request(NEWS_API_URL, (error, response, body) => {
-        const { articles } = JSON.parse(body);
-        if(!articles) {
-            p.play('Sorry, please try searching for a different category');
-            return;
-        }
-
-        savedArticles = articles;
-
-        p.play({ command : 'newHeadlines', articles});
+    api.axios.get(NEWS_API_URL)
+    .then((response) => {
+        savedArticles = response.data.articles;
+        p.play({ command : 'newHeadlines', savedArticles});
         if(p.C.value) {
             p.play(`Here are the (latest|recent) articles on ${p.C.value}`);
         }
         else if(p.C.value == ''){
             p.play(`Here are the (latest|recent) news`);
         }
-
         p.play('Would you like me to read the headlines ?');
         p.then(confirmation);
-    });
+        })
+        .catch((error) => {
+            p.play('Sorry, please try searching for something else');
+        });
 })
 
 //News by Country 
@@ -155,38 +148,34 @@ const COUNTRIES = {
 intent(`(show|what is|tell me|what's|what are|what're|read) (the|) (recent|latest|) (news|headlines) (in|about|on|) $(C~ ${CATEGORIES_INTENT}) from $(COUNTRY* (.*))`,
        `(read|show|get|bring me|give me) (the|) (recent|latest) $(C~ ${CATEGORIES_INTENT}) (news|headlines) from $(COUNTRY* (.*))`, (p) => {
 
-    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}` ;
+    let NEWS_API_URL = `https://newsapi.org/v2/top-headlines?apiKey=${API_KEY}&country=in` ;
 
 
     const keys = Object.keys(COUNTRIES);
 
     keys.forEach((key, index) => {
         if(COUNTRIES[key] === p.COUNTRY.value){
-            NEWS_API_URL = `${NEWS_API_URL}&country=${key}` ;
+            NEWS_API_URL = `${NEWS_API_URL.slice(0, -11)}&country=${key}` ;
         }  
     });
 
 
     if(p.C.value) {
-        NEWS_API_URL = `${NEWS_API_URL}&category=${p.C.value}`;
+        NEWS_API_URL = `${NEWS_API_URL.slice(0, -11)}&category=${p.C.value}`;
     }
 
-    api.request(NEWS_API_URL, (error, response, body) => {
-        const { articles } = JSON.parse(body);
-        if(!articles) {
-            p.play('Sorry, please try searching for a different country');
-            return;
-        }
-
-        savedArticles = articles;
-
-        p.play({ command : 'newHeadlines', articles});
+    api.axios.get(NEWS_API_URL)
+    .then((response) => {
+        savedArticles = response.data.articles;
+        p.play({ command : 'newHeadlines', savedArticles});
         p.play(`Here are the (latest|recent) articles on ${p.C.value} from ${p.COUNTRY.value}`);
 
         p.play('Would you like me to read the headlines ?');
         p.then(confirmation);
+    })
+    .catch((error) => {
+        p.play('Sorry, please try searching for a different country');
     });
-
 })
 
 const confirmation = context(() => {
@@ -212,7 +201,7 @@ intent(`Open (the|) (article|) (number|) $(NUM* (.*))`, (p) => {
 //Going back
 intent('(go|) back', (p)=> {
     p.play('Sure, going back');
-    p.play({command: 'newHeadlines', articles: []});
+    p.play({command: 'newHeadlines', savedArticles: []});
 })
 
 intent('Thanks (Alan|)','Thank you (Alan|)', (p)=> {

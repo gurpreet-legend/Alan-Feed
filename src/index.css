@@ -1,7 +1,7 @@
 #root,
 html,
 body {
-  height: 100vh;
+  height: 100%;
 }
 
 body {
@@ -14,23 +14,24 @@ body {
   box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-.cont{
-    background-color: black;
+.dark{
+    background-color: rgb(26, 3, 58);
     color: white;
-    height: 120vh;
+    height: 100vh;
+    overflow-y: scroll;
 }
-.cont2{
+.light{
     background-color: white;
     color: black;
-    height: 120vh;
+    height: 100vh;
+    overflow-y: scroll;
 }
 #btn{
     border-radius: 12px;
-    height: 30px;
-    background-color: yellowgreen;
+    padding:10px;
+    height: fit-content;
+    width: auto;
+    background-color: rgb(38, 138, 214);
     color: white;
     cursor: pointer;
     position: fixed;
