@@ -4,6 +4,7 @@ import NewsCards from './components/NewsCards/NewsCards'
 import wordsToNumbers from 'words-to-numbers'
 import useStyles from './styles'
 import Config from './config/config'
+import './index.css'
 
 const alanKey = Config.alanKey
 
@@ -11,8 +12,22 @@ const App = () => {
 
     const [ newsArticles, setNewsArticles] = useState([]);
     const [activeArticle, setActiveArticle] = useState(-1);
+    const [style, setStyle] = useState("cont");
+    
+    
     const classes = useStyles();
 
+    const changeMode = () => {
+       
+      if(style=="cont")
+       {
+        setStyle("cont2");
+       }
+        else setStyle("cont");
+       
+      };
+
+      
     useEffect(() => {
         alanBtn({
             key: alanKey,
@@ -40,12 +55,15 @@ const App = () => {
         })
     }, []);
 
+    
+
     return (
-        <div>
+        <div className={style} >
             <div className={classes.logoContainer}>
                 <img src="https://miro.medium.com/max/1200/1*CJyCnZVdr-EfgC27MAdFUQ.jpeg" alt="Alan logo" className={classes.alanLogo}/>
             </div>
             <NewsCards articles={newsArticles} activeArticle={activeArticle}/>
+            <button onClick={changeMode} id="btn"> Toggle Mode</button>
         </div>
     )
 }
