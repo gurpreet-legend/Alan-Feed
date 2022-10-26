@@ -15,5 +15,31 @@ body {
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
+.cont{
+    background-color: black;
+    color: white;
+    height: 120vh;
+}
+.cont2{
+    background-color: white;
+    color: black;
+    height: 120vh;
+}
+#btn{
+    border-radius: 12px;
+    height: 30px;
+    background-color: yellowgreen;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    margin-left: 90vw;
+    margin-top: -80vh;
+   
+}
+#btn:hover{
+    background-color: burlywood;
+    box-shadow: 0 12px 16px 0 rgba(12, 165, 48, 0.24), 0 17px 50px 0 rgba(11, 174, 90, 0.19);
+}
+
