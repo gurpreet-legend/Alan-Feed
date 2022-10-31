@@ -14,15 +14,16 @@
     "classnames": "^2.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.6.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
     "words-to-numbers": "^1.5.1"
   },
   "devDependencies": {
+    "immer": ">=9.0.6",
     "nth-check": ">=2.0.1",
-    "set-value": ">=4.0.1",
     "path-parse": ">=1.0.7",
-    "immer": ">=9.0.6"
+    "set-value": ">=4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
